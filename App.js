@@ -593,127 +593,282 @@
 //     justifyContent: 'center',
 //     alignItems: 'center',
 //   },
+//INSTAGRAM
+// import Lista from './src/Lista';
+
+// export default class App extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//         feed: [
+//            {
+//           id: '1', 
+//           nome: 'Lucas Silva', 
+//           descricao: 'Mais um dia de muitos bugs :)', 
+//           imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png', 
+//           imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto1.png',  
+//           likeada: false, 
+//           likers: 0
+//          },
+//         {
+//           id: '2', 
+//           nome: 'Matheus', 
+//           descricao: 'Isso sim é ser raiz!!!!!', 
+//           imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png', 
+//           imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto2.png', 
+//           likeada: false, 
+//           likers: 0
+//         },
+//         {
+//           id: '3', 
+//           nome: 'Jose Augusto', 
+//           descricao: 'Bora trabalhar Haha', 
+//           imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil3.png', 
+//           imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto3.png',  
+//           likeada: false, 
+//           likers: 3
+//         },
+//         {
+//           id: '4', 
+//           nome: 'Gustavo Henrique', 
+//           descricao: 'Isso sim que é TI!', 
+//           imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png', 
+//           imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto4.png', 
+//           likeada: false, 
+//           likers: 1
+//         },
+//         {
+//           id: '5', 
+//           nome: 'Guilherme', 
+//           descricao: 'Boa tarde galera do insta...', 
+//           imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png', 
+//           imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto5.png',
+//           likeada: false, 
+//           likers: 32
+//         }
+//         ]
+
+//     };
+//   }
+
+//   render() {
+
+//     return (
+//       <View style={styles.container}>
+//          <View style={styles.header}>  
+//             <TouchableOpacity>
+//                   <Image
+//             source={require('./src/img/logo.png')} //botao Home
+//             style={styles.logo}
+//             />
+//             </TouchableOpacity>
+
+//             <TouchableOpacity>
+//             <Image
+//             source={require('./src/img/send.png')} //botao Send
+//             style={styles.send}
+//             />
+//             </TouchableOpacity>
+//             </View>
+
+//         <FlatList
+//         showsHorizontalScrollIndicator={false}
+//         data={this.state.feed}
+//         renderItem={ ({item}) => <Lista data={item}/>}
+//         keyExtractor={ (item) => item.id }
+//         />
+//       </View>
+//     );
+// }
+
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     marginTop: 20,
+// },
+//   header: {
+//     backgroundColor: '#fff',
+//     height: 55,
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'space-between',
+//     padding: 5,
+
+//     borderBottomWidth: 0.2,
+//     shadowColor: '#000',
+//     elevation: 1,
+
+// },
+// send: {
+//     width: 23,
+//     height: 23,
+//     marginRight: 10,
+// },
+//   });
+
+// ASYNCSTORAGE
+//class App extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       input: '',
+//       nome: 'Zumger',
+//     };
+//     this.gravaNome = this.gravaNome.bind(this);
+//   }
+
+
+//   //ComponentDidMount - Executado quando o componente é montado em tela
+//   async componentDidMount() {
+//     await AsyncStorage.getItem('nome').then((value) => { this.setState({ nome: value }) })
+
+//   }
+
+//   //ComponentDidUpdate - toda vez que um state fora atualizado
+//   async componentDidUpdate(prevProp, prevState) {
+//     const nome = this.state.nome;
+
+//     if (prevState !== nome) {
+//       await AsyncStorage.setItem('nome', nome);
+
+//     }
+//   }
+//   gravaNome() {
+//     this.setState({
+//       nome: this.state.input
+//     });
+//     Keyboard.dismiss();
+//   }
+
+//   render() {
+//     return (
+//       <View style={styles.container}>
+
+
+//         <View style={styles.viewInput}>
+//           <TextInput
+//             style={styles.input}
+//             value={this.state.input}
+//             placeholder='Nome'
+//             underlineColorAndroid="transparent"
+//             onChangeText={(text) => this.setState({ input: text })}
+//           />
+
+//           <TouchableOpacity
+//             onPress={this.gravaNome}
+//           >
+//             <Text style={styles.botao}>+</Text>
+
+//           </TouchableOpacity>
+//         </View>
+
+//         <Text>{this.state.nome}</Text>
+
+//       </View>
+//     );
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     marginTop: 30,
+//     alignItems: 'center',
+//   },
+//   viewInput: {
+//     flexDirection: 'row',
+//     alignItems: 'center'
+//   },
+//   input: {
+//     width: 350,
+//     height: 40,
+//     borderColor: '#000',
+//     borderWidth: 1,
+//     padding: 10,
+//   },
+//   botao: {
+//     backgroundColor: '#000',
+//     color: '#FFF',
+//     height: 40,
+//     padding: 10,
+//     marginLeft: 4,
+
+//   },
+//   nome: {
+//     fontSize: 30,
+//     textAlign: 'center',
+//   }
+// });
+
+// export default App;
+
+
+
+
 
 
 import React, { Component } from 'react';
-import { View, Text, Image, Button, StyleSheet, TouchableOpacity, ScrollView, FlatList, Switch } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { View, Keyboard, Modal, TextInput, Text, Image, Button, StyleSheet, TouchableOpacity, ScrollView, FlatList, Switch } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Slider from '@react-native-community/slider';
-import Lista from './src/Lista';
+import Entrar from './src/Entrar';
 
-export default class App extends Component {
+
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        feed: [
-           {
-          id: '1', 
-          nome: 'Lucas Silva', 
-          descricao: 'Mais um dia de muitos bugs :)', 
-          imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png', 
-          imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto1.png',  
-          likeada: false, 
-          likers: 0
-         },
-        {
-          id: '2', 
-          nome: 'Matheus', 
-          descricao: 'Isso sim é ser raiz!!!!!', 
-          imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png', 
-          imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto2.png', 
-          likeada: false, 
-          likers: 0
-        },
-        {
-          id: '3', 
-          nome: 'Jose Augusto', 
-          descricao: 'Bora trabalhar Haha', 
-          imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil3.png', 
-          imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto3.png',  
-          likeada: false, 
-          likers: 3
-        },
-        {
-          id: '4', 
-          nome: 'Gustavo Henrique', 
-          descricao: 'Isso sim que é TI!', 
-          imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png', 
-          imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto4.png', 
-          likeada: false, 
-          likers: 1
-        },
-        {
-          id: '5', 
-          nome: 'Guilherme', 
-          descricao: 'Boa tarde galera do insta...', 
-          imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png', 
-          imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto5.png',
-          likeada: false, 
-          likers: 32
-        }
-        ]
-
+      modalVisible:false,
     };
+    this.entrar = this.entrar.bind(this);
+    this.sair = this.sair.bind(this);
   }
 
-  render() {
+  entrar() {
+    this.setState({modalVisible: true})
+  }
 
+  sair(visible){
+    this.setState({modalVisible: visible})
+  }
+
+
+  render() {
     return (
       <View style={styles.container}>
-         <View style={styles.header}>  
-            <TouchableOpacity>
-                  <Image
-            source={require('./src/img/logo.png')} //botao Home
-            style={styles.logo}
-            />
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-            <Image
-            source={require('./src/img/send.png')} //botao Send
-            style={styles.send}
-            />
-            </TouchableOpacity>
-            </View>
-
-        <FlatList
-        showsHorizontalScrollIndicator={false}
-        data={this.state.feed}
-        renderItem={ ({item}) => <Lista data={item}/>}
-        keyExtractor={ (item) => item.id }
+        <Button
+          title='Entrar'
+          onPress={this.entrar}
         />
+        <Modal
+          transparent={true} animationType="slide" visible={this.state.modalVisible}>
+            <View style={styles.ViewModal}>
+            <Entrar fechar={() => this.sair(false)} />
+            </View>
+        </Modal>
+
+
       </View>
     );
-}
-
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
-},
-  header: {
-    backgroundColor: '#fff',
-    height: 55,
-    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 5,
+    backgroundColor: '#ffffffff',
+  },
+  ViewModal: {
+    margin: 15,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
 
-    borderBottomWidth: 0.2,
-    shadowColor: '#000',
-    elevation: 1,
-
-},
-send: {
-    width: 23,
-    height: 23,
-    marginRight: 10,
-},
-  });
-
-
-
-
-
+export default App;
