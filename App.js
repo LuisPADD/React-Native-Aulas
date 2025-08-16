@@ -804,71 +804,157 @@
 
 // export default App;
 
+// import Entrar from './src/Entrar';
+
+
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       modalVisible:false,
+//     };
+//     this.entrar = this.entrar.bind(this);
+//     this.sair = this.sair.bind(this);
+//   }
+
+//   entrar() {
+//     this.setState({modalVisible: true})
+//   }
+
+//   sair(visible){
+//     this.setState({modalVisible: visible})
+//   }
+
+
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <Button
+//           title='Entrar'
+//           onPress={this.entrar}
+//         />
+//         <Modal
+//           transparent={true} animationType="slide" visible={this.state.modalVisible}>
+//             <View style={styles.ViewModal}>
+//             <Entrar fechar={() => this.sair(false)} />
+//             </View>
+//         </Modal>
+
+
+//       </View>
+//     );
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#ffffffff',
+//   },
+//   ViewModal: {
+//     margin: 15,
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center'
+//   }
+// });
+
+// export default App;
 
 
 
 
 
-import React, { Component } from 'react';
-import { View, Keyboard, Modal, TextInput, Text, Image, Button, StyleSheet, TouchableOpacity, ScrollView, FlatList, Switch } from 'react-native';
+
+
+import React, { Component, useState, useEffect, useMemo, useRef} from 'react';
+import { View, Keyboard, Modal, TextInput, Text, Image, Button, StyleSheet, TouchableOpacity, ScrollView, FlatList, Switch,  } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Slider from '@react-native-community/slider';
-import Entrar from './src/Entrar';
+
+export default function App(){
+
+  const [nome, setNome] = useState('');
+  const [input, setInput] = useState ('');
+  const nomeInput = useRef(null);
+
+  useEffect(()=>{
+
+    async function getStorage(){
+    const nomeStorage = await AsyncStorage.getItem('nomes');
+
+    if(nomeStorage !== null){
+      setNome(nomeStorage);
+    }
+  }
+    getStorage();
+  },[])
 
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible:false,
-    };
-    this.entrar = this.entrar.bind(this);
-    this.sair = this.sair.bind(this);
+  useEffect(()=>{
+    async function saveStorage(){
+      await AsyncStorage.setItem('nomes', nome)
+    }
+    saveStorage();
+  }, [nome])
+
+  function alteraNome(){
+    setNome(input);
+    setInput('');
   }
 
-  entrar() {
-    this.setState({modalVisible: true})
+  function novoNome(){
+    nomeInput.current.focus();
   }
 
-  sair(visible){
-    this.setState({modalVisible: visible})
-  }
+  const letrasNome = useMemo(()=> {return nome.length},[nome]);
 
-
-  render() {
-    return (
+    return(
       <View style={styles.container}>
-        <Button
-          title='Entrar'
-          onPress={this.entrar}
+
+        <TextInput
+        placeholder="Seu Nome..."
+        value={input}
+        onChangeText={(texto)=> setInput(texto)}
+        ref={nomeInput}
         />
-        <Modal
-          transparent={true} animationType="slide" visible={this.state.modalVisible}>
-            <View style={styles.ViewModal}>
-            <Entrar fechar={() => this.sair(false)} />
-            </View>
-        </Modal>
+
+        
+        <TouchableOpacity style={styles.btn}
+        onPress={alteraNome}>
+          <Text style={styles.btnText}>Altera Nome</Text>
+        </TouchableOpacity>
+        <Text style={styles.texto}>{nome}</Text>
+        <Text style={styles.texto}>Tem {letrasNome} Letras</Text>
 
 
+        <TouchableOpacity
+        onPress={novoNome}
+        >
+          <Text>Novo Nome</Text>
+        </TouchableOpacity>
       </View>
+
     );
-  }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffffffff',
+  container: { flex: 1,
+    marginTop: 15,
   },
-  ViewModal: {
-    margin: 15,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+texto: {
+  color: '#000',
+  fontSize: 35,
+},
+btn: {
+  backgroundColor: '#222',
+  alignItems: 'center',
+},
+btnText: {
+  color: '#FFF'
+},
 
-export default App;
+});
